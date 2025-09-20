@@ -14,6 +14,7 @@ import 'package:my_proposal/the_drama_queen/walk_with_me.dart';
 import 'package:my_proposal/the_super_woman/the_super_woman.dart';
 import 'package:my_proposal/typing_animator.dart';
 import 'package:my_proposal/widgets/before_we_proceed.dart';
+import 'package:my_proposal/widgets/ending_text.dart';
 import 'package:my_proposal/widgets/header_display.dart';
 import 'package:rive/rive.dart' show RiveAnimation;
 
@@ -80,6 +81,137 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final widgets = [
+      Container(
+        padding: EdgeInsets.only(bottom: 15, top: 15),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: .2),
+          ),
+        ),
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              'icons/star.svg',
+              height: 16.sp,
+              width: 16.sp,
+            ),
+            SizedBox(width: 16.w),
+            Text(
+              'Forever & Always ',
+              style: context.textTheme.t20W600,
+            ),
+          ],
+        ),
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          HeaderDisplay(
+            onOneComplete: () {
+              setState(() {
+                text1Complete = true;
+              });
+            },
+            onTwoComplete: () {
+              setState(() {
+                text2Complete = true;
+              });
+            },
+          ),
+          Padding(
+            padding: EdgeInsets.all(20.sp),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (text1Complete)
+                  TypingAnimator(
+                    fullText: "Our Story",
+                    speed: Duration(milliseconds: 100),
+                    builder: (text) => Text(
+                      text,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24.sp,
+                      ),
+                    ),
+                    onComplete: () {
+                      setState(() {
+                        text3Complete = true;
+                      });
+                    },
+                  ),
+                if (text3Complete)
+                  TypingAnimator(
+                    fullText: story,
+                    speed: Duration(milliseconds: 20),
+                    builder: (text) => Text(
+                      text,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    onComplete: () {
+                      setState(() {
+                        text4Complete = true;
+                      });
+                    },
+                  ),
+                if (text4Complete) ...[
+                  OurMemories(),
+                  SizedBox(height: 50),
+                  WhoIsGummyBear(),
+                  if (!questionAnswered) ...[
+                    WalkWithMe(),
+                    BeforeWeProceed(
+                      onAnswer: (bool answer) {
+                        setState(() {
+                          questionAnswered = true;
+                        });
+                      },
+                    ),
+                  ],
+                  if (questionAnswered) ...[
+                    FutureBuilder(
+                      future: Future.delayed(
+                        const Duration(
+                          seconds: 3,
+                        ),
+                      ),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return Center(
+                            child: Column(
+                              children: [
+                                TheDramaQueen(),
+                                TheBeautyQueen(),
+                                TheSuperWoman(),
+                                SizedBox(height: 50),
+                                EndingText(),
+                              ],
+                            ),
+                          );
+                        }
+                        return SizedBox(
+                          height: 200,
+                          child: Center(
+                            child: Text(
+                              "Yay!! Loading more surprises... ",
+                              style: context.textTheme.t20W600,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ]
+                ]
+              ],
+            ),
+          ),
+        ],
+      ),
+    ];
     return Scaffold(
       backgroundColor: AppColors.secondaryColor,
       body: SafeArea(
@@ -99,159 +231,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           ),
           child: Stack(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(bottom: 15, top: 15),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(width: .2),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          'icons/star.svg',
-                          height: 16.sp,
-                          width: 16.sp,
-                        ),
-                        SizedBox(width: 16.w),
-                        Text(
-                          'Forever & Always ',
-                          style: context.textTheme.t20W600,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          HeaderDisplay(
-                            onOneComplete: () {
-                              setState(() {
-                                text1Complete = true;
-                              });
-                            },
-                            onTwoComplete: () {
-                              setState(() {
-                                text2Complete = true;
-                              });
-                            },
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(20.sp),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (text1Complete)
-                                  TypingAnimator(
-                                    fullText: "Our Story",
-                                    speed: Duration(milliseconds: 100),
-                                    builder: (text) => Text(
-                                      text,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 24.sp,
-                                      ),
-                                    ),
-                                    onComplete: () {
-                                      setState(() {
-                                        text3Complete = true;
-                                      });
-                                    },
-                                  ),
-                                if (text3Complete)
-                                  TypingAnimator(
-                                    fullText: story,
-                                    speed: Duration(milliseconds: 20),
-                                    builder: (text) => Text(
-                                      text,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 12.sp,
-                                      ),
-                                    ),
-                                    onComplete: () {
-                                      setState(() {
-                                        text4Complete = true;
-                                      });
-                                    },
-                                  ),
-                                if (text4Complete) ...[
-                                  OurMemories(),
-                                  SizedBox(height: 50),
-                                  WhoIsGummyBear(),
-                                  if (!questionAnswered) ...[
-                                    WalkWithMe(),
-                                    BeforeWeProceed(
-                                      onAnswer: (bool answer) {
-                                        setState(() {
-                                          questionAnswered = true;
-                                        });
-                                      },
-                                    ),
-                                  ],
-                                  if (questionAnswered) ...[
-                                    FutureBuilder(
-                                      future: Future.delayed(
-                                        const Duration(
-                                          seconds: 3,
-                                        ),
-                                      ),
-                                      builder: (context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          return Center(
-                                            child: Column(
-                                              children: [
-                                                TheDramaQueen(),
-                                                TheBeautyQueen(),
-                                                TheSuperWoman(),
-                                                SizedBox(height: 50),
-                                                Text(
-                                                  "Okay. that's the end for now..😉",
-                                                  style:
-                                                      context.textTheme.t14W500,
-                                                ),
-                                                SizedBox(height: 20),
-                                                Text(
-                                                  "But not the end of us..🥰",
-                                                  style:
-                                                      context.textTheme.t14W500,
-                                                ),
-                                                Text(
-                                                  "I love you today, tomorrow, and the day after ❤️",
-                                                  style:
-                                                      context.textTheme.t20W600,
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        }
-                                        return SizedBox(
-                                          height: 200,
-                                          child: Center(
-                                            child: Text(
-                                              "Yay!! Loading more surprises... ",
-                                              style: context.textTheme.t20W600,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ]
-                                ]
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+              ListView.builder(
+                itemBuilder: (context, index) {
+                  return widgets[index];
+                },
+                itemCount: widgets.length,
               ),
               if (questionAnswered)
                 Positioned.fill(

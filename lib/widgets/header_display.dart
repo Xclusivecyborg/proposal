@@ -70,11 +70,11 @@ class _HeaderDisplayState extends State<HeaderDisplay>
                 Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
+                      begin: Alignment.center,
+                      end: Alignment.bottomCenter,
                       colors: [
-                        Colors.white.withValues(alpha: .4),
-                        Colors.black.withValues(alpha: .4),
+                        Colors.white.withValues(alpha: .1),
+                        Color(0xFF531d2d).withValues(alpha: .5),
                       ],
                     ),
                   ),
@@ -105,7 +105,7 @@ class _HeaderDisplayState extends State<HeaderDisplay>
                           text,
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
-                            fontSize: 12.sp,
+                            fontSize: 14.sp,
                             color: Colors.white,
                           ),
                           textAlign: TextAlign.end,

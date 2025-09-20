@@ -173,6 +173,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     ),
                   ],
                   if (questionAnswered) ...[
+                    Center(
+                      child: Column(
+                        children: [
+                          TheDramaQueen(),
+                          TheBeautyQueen(),
+                          TheSuperWoman(),
+                          SizedBox(height: 50),
+                          EndingText(),
+                        ],
+                      ),
+                    ),
+                    /*
                     FutureBuilder(
                       future: Future.delayed(
                         const Duration(
@@ -203,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           ),
                         );
                       },
-                    ),
+                    ), */
                   ]
                 ]
               ],

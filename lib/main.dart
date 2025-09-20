@@ -16,6 +16,7 @@ import 'package:my_proposal/typing_animator.dart';
 import 'package:my_proposal/widgets/before_we_proceed.dart';
 import 'package:my_proposal/widgets/ending_text.dart';
 import 'package:my_proposal/widgets/header_display.dart';
+import 'package:rive/rive.dart' show RiveAnimation;
 
 String story = '''
 I'll never forget what caught your attention - a simple flutterwave water bottle. It's funny how the smallest things can lead to the greatest adventures. That water bottle was the start of our beautiful journey, a journey filled with laughter, love, and countless cherished memories. 
@@ -236,22 +237,22 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 },
                 itemCount: widgets.length,
               ),
-              // if (questionAnswered)
-              //   Positioned.fill(
-              //     child: TweenAnimationBuilder(
-              //       tween: StepTween(begin: 0, end: 1),
-              //       duration: const Duration(milliseconds: 3000),
-              //       builder: (context, val, __) {
-              //         return Visibility(
-              //           visible: val < 1,
-              //           child: RiveAnimation.asset(
-              //             'assets/rive/welcome_animation.riv',
-              //             fit: BoxFit.cover,
-              //           ),
-              //         );
-              //       },
-              //     ),
-              //   ),
+              if (questionAnswered)
+                Positioned.fill(
+                  child: TweenAnimationBuilder(
+                    tween: StepTween(begin: 0, end: 1),
+                    duration: const Duration(milliseconds: 3000),
+                    builder: (context, val, __) {
+                      return Visibility(
+                        visible: val < 1,
+                        child: RiveAnimation.asset(
+                          'assets/rive/welcome_animation.riv',
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  ),
+                ),
             ],
           ),
         ),

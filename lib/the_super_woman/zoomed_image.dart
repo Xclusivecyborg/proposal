@@ -70,22 +70,24 @@ class _ZoomedImageState extends State<ZoomedImage>
           panEnabled: false,
           child: widget.type == ImageType.file
               ? Image.asset(widget.imageUrl, fit: BoxFit.contain)
-              : CachedNetworkImage(
-                  imageUrl: widget.imageUrl,
-                  fit: BoxFit.contain,
-                  progressIndicatorBuilder: (context, url, progress) =>
-                      CircularProgressIndicator(
-                    value: progress.progress,
+              : Center(
+                child: CachedNetworkImage(
+                    imageUrl: widget.imageUrl,
+                    fit: BoxFit.fill,
+                    progressIndicatorBuilder: (context, url, progress) =>
+                        CircularProgressIndicator(
+                      value: progress.progress,
+                    ),
+                    errorWidget: (context, url, error) {
+                      return const Center(
+                        child: Text(
+                          'An error occurred while Loading the image..',
+                          style: TextStyle(color: Colors.white, fontSize: 17),
+                        ),
+                      );
+                    },
                   ),
-                  errorWidget: (context, url, error) {
-                    return const Center(
-                      child: Text(
-                        'An error occurred while Loading the image..',
-                        style: TextStyle(color: Colors.white, fontSize: 17),
-                      ),
-                    );
-                  },
-                ),
+              ),
         ),
       ),
     );

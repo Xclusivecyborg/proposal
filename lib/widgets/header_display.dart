@@ -70,11 +70,15 @@ class _HeaderDisplayState extends State<HeaderDisplay>
                 Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
+                      stops: [
+                        0.0,
+                        0.7,
+                      ],
                       begin: Alignment.center,
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.white.withValues(alpha: .1),
-                        Color(0xFF531d2d).withValues(alpha: .5),
+                        Color(0xFF531d2d).withValues(alpha: .7),
                       ],
                     ),
                   ),

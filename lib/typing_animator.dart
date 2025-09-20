@@ -36,7 +36,7 @@ class _TypingAnimatorState extends State<TypingAnimator> {
   void _startTyping() {
     _timer = Timer.periodic(widget.speed, (timer) {
       if (_index < widget.fullText.length) {
-          setState(() {
+        setState(() {
           _currentText += widget.fullText[_index];
           _index++;
         });

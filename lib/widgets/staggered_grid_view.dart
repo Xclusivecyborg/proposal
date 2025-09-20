@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:my_proposal/core/extension/string_extension.dart';
+import 'package:my_proposal/the_super_woman/zoomed_image.dart';
 import 'package:my_proposal/widgets/proposal_video_thumbnail.dart';
 
 class StaggeredGridView extends StatefulWidget {
@@ -103,7 +104,18 @@ class _StaggeredGridViewState extends State<StaggeredGridView>
                       ),
                     ),
                   ),
-                  child: childWidget,
+                  child: GestureDetector(
+                      onTap: () {
+                        if (!imageUrl.containsVideoExtension) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ZoomedImage(
+                                  imageUrl: imageUrl, type: ImageType.network),
+                            ),
+                          );
+                        }
+                      },
+                      child: childWidget),
                 ),
               );
             });

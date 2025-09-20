@@ -86,8 +86,14 @@ class _NetworkVideoPlayerState extends State<NetworkVideoPlayer> {
                   child: VideoPlayer(_controller!),
                 ),
               ),
+            if ((_controller?.value.isBuffering ?? false) ||
+                !(_controller?.value.isInitialized ?? false))
+              const Center(
+                child: CircularProgressIndicator(),
+              ),
             Visibility(
-              visible: !isPlaying,
+              visible:
+                  !isPlaying && (_controller?.value.isInitialized ?? false),
               child: Align(
                 alignment: Alignment.center,
                 child: InkWell(

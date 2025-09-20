@@ -48,4 +48,10 @@ class RemoteConfigService {
     List<String> images = jsonDecode(items).cast<String>();
     return images;
   }
+
+  static List<String> get theSuperWoman {
+    final items = _instance._remoteConfig.getString('the_super_woman');
+    List<String> images = jsonDecode(items).cast<String>();
+    return images;
+  }
 }

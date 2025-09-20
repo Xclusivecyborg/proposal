@@ -41,7 +41,10 @@ class _TheBeautyQueenState extends State<TheBeautyQueen>
           style: context.textTheme.t20W600,
         ),
         const SizedBox(height: 20),
-        StaggeredGridView(images: memories),
+        StaggeredGridView(
+          images: memories,
+          key: ValueKey('BeautyQueenStaggeredGrid'),
+        ),
       ],
     );
   }

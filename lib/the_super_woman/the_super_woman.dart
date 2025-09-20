@@ -41,7 +41,10 @@ class _TheSuperWomanState extends State<TheSuperWoman>
           style: context.textTheme.t20W600,
         ),
         const SizedBox(height: 20),
-        StaggeredGridView(images: memories),
+        StaggeredGridView(
+          key: ValueKey('SuperWomanStaggeredGrid'),
+          images: memories,
+        ),
       ],
     );
   }

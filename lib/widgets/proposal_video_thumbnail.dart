@@ -17,6 +17,7 @@ class _ProposalVideoPlayerState extends State<ProposalVideoPlayer> {
   Widget build(BuildContext context) {
     final videos = RemoteConfigService.theDramaQueen;
     return StaggeredGridView(
+      key: ValueKey('DramaQueenStaggeredGrid'),
       images: videos,
       itemBuilder: (context, index, image) {
         double height = (index + 1) * 200;

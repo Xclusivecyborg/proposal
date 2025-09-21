@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -52,35 +51,37 @@ class _StaggeredGridViewState extends State<StaggeredGridView>
 
         double height = (index % 10 + 1) * 185;
 
-        final childWidget =
-            widget.itemBuilder?.call(context, index, imageUrl) ??
-                Container(
-                  height: height > 300 ? 300.h : height.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.grey.withValues(alpha: 0.2),
-                  ),
-                  child: imageUrl.containsVideoExtension
-                      ? Player(
-                          videoUrl: imageUrl,
-                          key: ValueKey(imageUrl),
-                        )
-                      : ClipRRect(
+        final childWidget = widget.itemBuilder
+                ?.call(context, index, imageUrl) ??
+            Container(
+                height: height > 300 ? 300.h : height.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.grey.withValues(alpha: 0.2),
+                ),
+                child: imageUrl.containsVideoExtension
+                    ? Player(
+                        videoUrl: imageUrl,
+                        key: ValueKey(imageUrl),
+                      )
+                    : SizedBox()
+
+                /*ClipRRect(
                           borderRadius: BorderRadius.circular(15),
-                          child: CachedNetworkImage(
-                            imageUrl: imageUrl,
-                            fit: BoxFit.cover,
-                            errorWidget: (context, url, error) {
-                              return Container(
-                                color: Colors.grey.withValues(alpha: 0.2),
-                                child: Icon(
-                                  Icons.broken_image,
-                                  color: Colors.white70,
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                          // child: CachedNetworkImage(
+                          //   imageUrl: imageUrl,
+                          //   fit: BoxFit.cover,
+                          //   errorWidget: (context, url, error) {
+                          //     return Container(
+                          //       color: Colors.grey.withValues(alpha: 0.2),
+                          //       child: Icon(
+                          //         Icons.broken_image,
+                          //         color: Colors.white70,
+                          //       ),
+                          //     );
+                          //   },
+                          // ), 
+                        ),*/
                 );
 
         return AnimatedBuilder(

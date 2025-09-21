@@ -253,21 +253,22 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     },
                   ),
                 ),
-              Positioned.fill(
-                child: TweenAnimationBuilder(
-                  tween: StepTween(begin: 0, end: 1),
-                  duration: const Duration(milliseconds: 3000),
-                  builder: (context, val, __) {
-                    return Visibility(
-                      visible: val < 1,
-                      child: RiveAnimation.asset(
-                        'assets/rive/welcome_animation.riv',
-                        fit: BoxFit.cover,
-                      ),
-                    );
-                  },
+              if (questionAnswered)
+                Positioned.fill(
+                  child: TweenAnimationBuilder(
+                    tween: StepTween(begin: 0, end: 1),
+                    duration: const Duration(milliseconds: 3000),
+                    builder: (context, val, __) {
+                      return Visibility(
+                        visible: val < 1,
+                        child: RiveAnimation.asset(
+                          'assets/rive/welcome_animation.riv',
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
             ],
           ),
         ),

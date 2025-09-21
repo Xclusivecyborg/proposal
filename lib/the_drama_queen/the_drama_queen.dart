@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_proposal/core/extension/text_theme.dart';
-import 'package:my_proposal/widgets/proposal_video_thumbnail.dart';
+import 'package:my_proposal/core/services/firebase_remote_config_service.dart';
+import 'package:my_proposal/widgets/staggered_grid_view.dart';
 
 class TheDramaQueen extends StatefulWidget {
   const TheDramaQueen({super.key});
@@ -21,7 +22,10 @@ class _TheDramaQueenState extends State<TheDramaQueen> {
           style: context.textTheme.t20W600,
         ),
         SizedBox(height: 20),
-        ProposalVideoPlayer(),
+        StaggeredGridView(
+          images: RemoteConfigService.theDramaQueen,
+          key: ValueKey('DramaQueenStaggeredGrid'),
+        ),
       ],
     );
   }

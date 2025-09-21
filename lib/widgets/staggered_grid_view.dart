@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:my_proposal/core/extension/string_extension.dart';
 import 'package:my_proposal/the_super_woman/zoomed_image.dart';
+import 'package:my_proposal/widgets/network_video_player.dart';
 import 'package:my_proposal/widgets/proposal_video_thumbnail.dart';
 
 class StaggeredGridView extends StatefulWidget {
@@ -57,7 +58,7 @@ class _StaggeredGridViewState extends State<StaggeredGridView>
                   height: height > 300 ? 300.h : height.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.grey,
+                    color: Colors.grey.withValues(alpha: 0.2),
                   ),
                   child: imageUrl.containsVideoExtension
                       ? Player(
@@ -69,6 +70,15 @@ class _StaggeredGridViewState extends State<StaggeredGridView>
                           child: CachedNetworkImage(
                             imageUrl: imageUrl,
                             fit: BoxFit.cover,
+                            errorWidget: (context, url, error) {
+                              return Container(
+                                color: Colors.grey.withValues(alpha: 0.2),
+                                child: Icon(
+                                  Icons.broken_image,
+                                  color: Colors.white70,
+                                ),
+                              );
+                            },
                           ),
                         ),
                 );
@@ -112,6 +122,17 @@ class _StaggeredGridViewState extends State<StaggeredGridView>
                               builder: (context) => ZoomedImage(
                                   imageUrl: imageUrl, type: ImageType.network),
                             ),
+                          );
+                        }
+                        if (imageUrl.containsVideoExtension) {
+                          showGeneralDialog(
+                            context: context,
+                            pageBuilder: (context, _, __) {
+                              return NetworkVideoPlayer(
+                                networkImage: imageUrl,
+                                shouldPlay: true,
+                              );
+                            },
                           );
                         }
                       },

@@ -69,18 +69,18 @@ class _StaggeredGridViewState extends State<StaggeredGridView>
                           borderRadius: BorderRadius.circular(15),
                           child: CachedNetworkImage(
                             width:
-                                (100 * MediaQuery.of(context).devicePixelRatio)
+                                (50 * MediaQuery.of(context).devicePixelRatio)
                                     .round()
                                     .w,
                             height:
-                                (75 * MediaQuery.of(context).devicePixelRatio)
+                                (35 * MediaQuery.of(context).devicePixelRatio)
                                     .round()
                                     .h,
                             memCacheWidth:
-                                (100 * MediaQuery.of(context).devicePixelRatio)
+                                (50 * MediaQuery.of(context).devicePixelRatio)
                                     .round(),
                             memCacheHeight:
-                                (75 * MediaQuery.of(context).devicePixelRatio)
+                                (35 * MediaQuery.of(context).devicePixelRatio)
                                     .round(),
                             imageUrl: imageUrl,
                             fit: BoxFit.cover,

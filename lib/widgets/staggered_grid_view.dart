@@ -46,6 +46,8 @@ class _StaggeredGridViewState extends State<StaggeredGridView>
       gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
       ),
+      mainAxisSpacing: 15,
+      crossAxisSpacing: 15,
       itemCount: widget.images.length,
       itemBuilder: (context, index) {
         final imageUrl = widget.images[index];

@@ -63,38 +63,42 @@ class _StaggeredGridViewState extends State<StaggeredGridView>
                     color: Colors.grey.withValues(alpha: 0.2),
                   ),
                   child: imageUrl.containsVideoExtension
-                      ? Player(
-                          videoUrl: imageUrl,
-                          key: ValueKey(imageUrl),
+                      ? RepaintBoundary(
+                          child: Player(
+                            videoUrl: imageUrl,
+                            key: ValueKey(imageUrl),
+                          ),
                         )
                       : ClipRRect(
                           borderRadius: BorderRadius.circular(15),
-                          child: CachedNetworkImage(
-                            width:
-                                (30 * MediaQuery.of(context).devicePixelRatio)
-                                    .round()
-                                    .w,
-                            height:
-                                (15 * MediaQuery.of(context).devicePixelRatio)
-                                    .round()
-                                    .h,
-                            memCacheWidth:
-                                (30 * MediaQuery.of(context).devicePixelRatio)
-                                    .round(),
-                            memCacheHeight:
-                                (15 * MediaQuery.of(context).devicePixelRatio)
-                                    .round(),
-                            imageUrl: imageUrl,
-                            fit: BoxFit.cover,
-                            errorWidget: (context, url, error) {
-                              return Container(
-                                color: Colors.grey.withValues(alpha: 0.2),
-                                child: Icon(
-                                  Icons.broken_image,
-                                  color: Colors.white70,
-                                ),
-                              );
-                            },
+                          child: RepaintBoundary(
+                            child: CachedNetworkImage(
+                              width:
+                                  (30 * MediaQuery.of(context).devicePixelRatio)
+                                      .round()
+                                      .w,
+                              height:
+                                  (15 * MediaQuery.of(context).devicePixelRatio)
+                                      .round()
+                                      .h,
+                              memCacheWidth:
+                                  (30 * MediaQuery.of(context).devicePixelRatio)
+                                      .round(),
+                              memCacheHeight:
+                                  (15 * MediaQuery.of(context).devicePixelRatio)
+                                      .round(),
+                              imageUrl: imageUrl,
+                              fit: BoxFit.cover,
+                              errorWidget: (context, url, error) {
+                                return Container(
+                                  color: Colors.grey.withValues(alpha: 0.2),
+                                  child: Icon(
+                                    Icons.broken_image,
+                                    color: Colors.white70,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
                 );

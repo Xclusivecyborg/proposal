@@ -40,12 +40,12 @@ class _StaggeredGridViewState extends State<StaggeredGridView>
 
   @override
   Widget build(BuildContext context) {
-    return MasonryGridView.count(
+    return MasonryGridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      crossAxisCount: 3,
-      crossAxisSpacing: 15,
-      mainAxisSpacing: 15,
+      gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+      ),
       itemCount: widget.images.length,
       itemBuilder: (context, index) {
         final imageUrl = widget.images[index];

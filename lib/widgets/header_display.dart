@@ -67,8 +67,10 @@ class _HeaderDisplayState extends State<HeaderDisplay>
                   imageUrl:
                       "https://myproposalbucketxclusivecyborg.s3.us-east-1.amazonaws.com/IMG_1415.JPG",
                   fit: BoxFit.cover,
-                  width: 100,
-                  height: 100,
+                  width: 30,
+                  height: 30,
+                  memCacheHeight:  30,
+                  memCacheWidth:  30,
                 ),
                 Container(
                   decoration: BoxDecoration(

@@ -166,6 +166,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     WalkWithMe(),
                     BeforeWeProceed(
                       onAnswer: (bool answer) {
+                        if (!answer) {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return NoDialog(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              );
+                            },
+                          );
+                          return;
+                        }
                         setState(() {
                           questionAnswered = true;
                         });
@@ -277,6 +290,56 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   }
 }
 
+class NoDialog extends StatelessWidget {
+  const NoDialog({super.key, required this.onPressed});
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      contentPadding: EdgeInsets.fromLTRB(24, 40, 24, 24),
+      backgroundColor: Colors.white,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('Who you dey follow talk that one?😒😒',
+              style: context.textTheme.t16W500.copyWith(
+                color: AppColors.primaryColor,
+                fontWeight: FontWeight.w300,
+              )),
+          SizedBox(height: 20),
+          Text(
+            'Better go back annd say Yes! 😁',
+            style: context.textTheme.t16W500.copyWith(
+              color: AppColors.primaryColor,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+          SizedBox(height: 20),
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            elevation: 10,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            color: Colors.pink,
+            child: Padding(
+              padding: EdgeInsets.all(24.0.r),
+              child: Text(
+                "Okay",
+                style: context.textTheme.t14W500.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 // class MyImage extends StatelessWidget {
 //   const MyImage({super.key});
 

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_proposal/typing_animator.dart';
@@ -62,10 +63,12 @@ class _HeaderDisplayState extends State<HeaderDisplay>
               // clipBehavior: Clip.none,
               fit: StackFit.expand,
               children: [
-                Image.network(
-                  "https://firebasestorage.googleapis.com/v0/b/spinchat-3c35b.appspot.com/o/our_images%2FIMG_1415.JPG?alt=media&token=bb15b7e2-be1b-4b0f-b9fa-5fa32b29fcbc",
-                  // "https://firebasestorage.googleapis.com/v0/b/spinchat-3c35b.appspot.com/o/IMG_2051.JPG?alt=media&token=23b0d4b2-c9f2-41f5-b40c-7080d6a2cd2a",
+                CachedNetworkImage(
+                  imageUrl:
+                      "https://myproposalbucketxclusivecyborg.s3.us-east-1.amazonaws.com/IMG_1415.JPG",
                   fit: BoxFit.cover,
+                  width: 100,
+                  height: 100,
                 ),
                 Container(
                   decoration: BoxDecoration(
